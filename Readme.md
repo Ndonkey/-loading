@@ -76,7 +76,7 @@ module.exports={
 ```
 devServer:{
   port:3000, #端口号
-  contentBase:'./dist', #目录
+  contentBase:'./dist', #目录  如果没有dist文件夹，他会在内存里创建
   open:true, #是否自动打开浏览器
   progress:true, #显示进度条
   compress:true  #是否开启gzip压缩
@@ -91,13 +91,14 @@ devServer:{
   - index.js
   - index.html 
 
-- [x] yarn add  html-webpack-plugin -D 
+- [x] yarn add  html-webpack-plugin -D || npm install html-webpack-plugin -D
 - 当有插件的时候需要配置plugins 插件集合类型是数组
 - 每一个插件都是通过new来调用，例：new HtmlWebpackPlugin()
 - 可以运行npm run dev/npm run build 查看结果
+- 装完插件后运行webpack会自动引入我们作为入口的index.js
 ```
 {
-  * template:'./src/index.html',//模板
+  * template:'./src/index.html',//使用那里的html做模板
   * filename:'index.html', //编译后的文件名 
   hash:true,//加hash值 
   minify:{ //压缩配置   
@@ -108,7 +109,7 @@ devServer:{
 ```
 
 
-## 处理样式
+## 处理样式    在webpack里面一切皆模块
 - src 
   - index.html
   - index.js
@@ -127,6 +128,8 @@ module:{
 }
 ```
 loader的配置方法 test 匹配规则 use 使用什么loader 
+yarn add css-loader style-loader -D || npm install caa-loader style-loader -D
+- test表示什么文件使用当前的loader  使用正则配置
 - use的用法
 1. 字符串 只能写一个loader 
 use:'css-loader'
